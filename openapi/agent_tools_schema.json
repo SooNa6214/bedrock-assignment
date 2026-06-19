@@ -1,0 +1,148 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CodeBuddy Agent Tools",
+    "version": "1.0.0",
+    "description": "Tools for GitHub PR review, PR comments, Slack notification, and Python complexity analysis."
+  },
+  "paths": {
+    "/pr": {
+      "get": {
+        "operationId": "get_github_pr",
+        "summary": "Get GitHub Pull Request details",
+        "description": "Retrieves title, body, changed files, patches, and optional diff for a GitHub Pull Request. Use when the user asks to inspect or review a PR.",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "GitHub owner or organization."
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "GitHub repository name."
+          },
+          {
+            "name": "pr_number",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer" },
+            "description": "Pull Request number."
+          },
+          {
+            "name": "include_diff",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "enum": ["true", "false"] },
+            "description": "Whether to include the raw PR diff."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pull Request details retrieved successfully.",
+            "content": { "application/json": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/pr/comment": {
+      "post": {
+        "operationId": "post_pr_comment",
+        "summary": "Add a review comment to a Pull Request",
+        "description": "Posts a Markdown review comment to a GitHub Pull Request. Use after generating review findings.",
+        "parameters": [
+          {
+            "name": "owner",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "GitHub owner or organization."
+          },
+          {
+            "name": "repo",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "GitHub repository name."
+          },
+          {
+            "name": "pr_number",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer" },
+            "description": "Pull Request number."
+          },
+          {
+            "name": "comment",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Markdown comment body."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment added successfully.",
+            "content": { "application/json": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/slack/send": {
+      "post": {
+        "operationId": "send_slack_message",
+        "summary": "Send Slack notification",
+        "description": "Sends a message to Slack after code review is completed.",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Slack channel name such as #code-review."
+          },
+          {
+            "name": "message",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Message text."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Slack message sent successfully.",
+            "content": { "application/json": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    },
+    "/complexity": {
+      "post": {
+        "operationId": "analyze_complexity",
+        "summary": "Analyze Python cyclomatic complexity",
+        "description": "Analyzes Python source code and returns function-level complexity scores. Use when reviewing Python code changes.",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Python source code to analyze."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Complexity analysis completed.",
+            "content": { "application/json": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    }
+  }
+}
+

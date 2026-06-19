@@ -1,0 +1,2 @@
+"""CodeBuddy core package."""
+
