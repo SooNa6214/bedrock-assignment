@@ -3,7 +3,7 @@ import os
 import sys
 import uuid
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
 from codebuddy.agent_response import api_response
 from codebuddy.github_client import parse_pr_url
@@ -105,4 +105,3 @@ def handler(event, context):
         )
     except Exception as exc:
         return api_response(500, {"message": str(exc), "status": "failed", "session_id": session_id})
-
