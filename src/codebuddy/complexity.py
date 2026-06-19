@@ -43,12 +43,12 @@ class ComplexityVisitor(ast.NodeVisitor):
 
 def grade_complexity(score):
     if score <= 10:
-        return {"level": "GOOD", "label": "Good", "recommendation": "Keep as is"}
+        return {"level": "GOOD", "label": "좋음", "recommendation": "유지"}
     if score <= 20:
-        return {"level": "WARNING", "label": "Warning", "recommendation": "Consider refactoring"}
+        return {"level": "WARNING", "label": "주의", "recommendation": "리팩토링 고려"}
     if score <= 50:
-        return {"level": "COMPLEX", "label": "Complex", "recommendation": "Split the function"}
-    return {"level": "DANGER", "label": "Danger", "recommendation": "Rewrite recommended"}
+        return {"level": "COMPLEX", "label": "복잡", "recommendation": "함수 분할 필요"}
+    return {"level": "DANGER", "label": "위험", "recommendation": "재작성 권고"}
 
 
 def analyze_complexity(code):
