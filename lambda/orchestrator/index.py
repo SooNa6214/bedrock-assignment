@@ -95,7 +95,7 @@ def handler(event, context):
         return api_response(
             200,
             {
-                "message": "리뷰가 완료되었습니다.",
+                "message": "Review completed.",
                 "status": "completed",
                 "action": action,
                 "mode": mode,
