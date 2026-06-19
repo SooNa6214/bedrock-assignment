@@ -2,7 +2,7 @@ import json
 import os
 import sys
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "..", "src"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
 from codebuddy.agent_response import error_response, success_response
 from codebuddy.complexity import analyze_complexity
@@ -57,4 +57,3 @@ def handler(event, context):
         return error_response(event, f"Unsupported route: {method} {api_path}", 404)
     except Exception as exc:
         return error_response(event, str(exc), 500)
-
